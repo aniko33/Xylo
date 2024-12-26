@@ -1,0 +1,12 @@
+[package]
+name = "xylo"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.5.23", features = ["color", "derive"] }
+gix = "0.69.1"
+indicatif = "0.17.9"
+owo-colors = "4.1.0"
+serde = { version = "1.0.216", features = ["derive"] }
+toml = { version = "0.8.19", features = ["display"] }
