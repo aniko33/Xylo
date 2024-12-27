@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 use clap::builder::styling;
-use clap::{Parser, Subcommand};
+use clap::Parser;
 
 const STYLES: styling::Styles = styling::Styles::styled()
     .header(styling::AnsiColor::Green.on_default().bold())
@@ -11,21 +11,12 @@ const STYLES: styling::Styles = styling::Styles::styled()
 #[derive(Parser, Debug)]
 #[command(styles = STYLES)]
 pub struct Cli {
-    #[command(subcommand)]
-    pub commands: CommandsArgs,
-}
+    pub path: PathBuf,
 
-#[derive(Subcommand, Debug)]
-pub enum CommandsArgs {
-    Init {
-        path: PathBuf,
-
-        #[arg(long)]
-        no_git: bool,
-        #[arg(short, long)]
-        force: bool,
-        #[arg(short, long)]
-        target: Option<String>
-    },
-    Build 
+    #[arg(long)]
+    pub no_git: bool,
+    #[arg(short, long)]
+    pub force: bool,
+    #[arg(short, long)]
+    pub target: Option<String>
 }

@@ -31,14 +31,13 @@ pub struct ConfigBuildLinker {
 pub struct ConfigBuild {
     pub compiler: ConfigBuildCompiler,
     pub linker: ConfigBuildLinker,
-    pub files: Vec<String>,
+    pub main_filename: String,
     pub target: Option<String>,
     pub commands: Option<ConfigCommands>
 }
 
 #[derive(Serialize, Deserialize)]
 pub struct Config {
-    pub package: ConfigPackage,
     pub build: ConfigBuild
 }
 
@@ -74,14 +73,14 @@ impl ConfigManager {
         let linker_command = format!(
             "{} {} {}",
             self.config.build.linker.exec,
-            self.config.build.files.join(" "),
+            self.config.build.main_filename,
             linker_args
         );
 
         let compiler_command = format!(
             "{} {} {}",
             self.config.build.linker.exec,
-            self.config.build.files.join(" "),
+            self.config.build.main_filename,
             compiler_args
         );
 
@@ -104,10 +103,10 @@ impl ConfigManager {
         let (linker_command, compiler_command) = self.get_compile_command();
         let mut makefile_content = String::new();
 
-        makefile_content.push_str(&format!("target/main.o: src/main.c\n"));
+        makefile_content.push_str(&format!("target/{}.o: src/{}.c\n", &self.config.build.main_filename, &self.config.build.main_filename));
         makefile_content.push_str(&format!("\t{}\n", linker_command));
 
-        makefile_content.push_str(&format!("build: {}\n", "target/main.o"));
+        makefile_content.push_str(&format!("build: target/{}.o\n", &self.config.build.main_filename));
         if let Some(config_commands) = &self.config.build.commands {
             if let Some(pre_build) = &config_commands.pre_build {
                 makefile_content.push_str(&format!("\t{}\n", pre_build));
