@@ -27,10 +27,10 @@ pub struct Cli {
 
     #[arg(long)]
     pub no_git: bool,
-    // #[arg(short, long)]
-    // pub remote_repo: Option<String>,
     #[arg(short, long)]
     pub force: bool,
     #[arg(short, long)]
-    pub target: Option<String>
+    pub target: Option<String>,
+    #[arg(short, long)]
+    pub profile: Option<String>
 }
