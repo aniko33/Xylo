@@ -23,14 +23,23 @@ const STYLES: styling::Styles = styling::Styles::styled()
 #[derive(Parser, Debug)]
 #[command(styles = STYLES)]
 pub struct Cli {
+    /// Project destination path.
     pub path: PathBuf,
 
     #[arg(long)]
+    /// Skip Git initialization.
     pub no_git: bool,
+
     #[arg(short, long)]
+    /// Overwrite existing files.
     pub force: bool,
+
     #[arg(short, long)]
+    /// Set Clang compilation target.
     pub target: Option<String>,
+
     #[arg(short, long)]
+    /// Select a config profile from `xylo.toml`.
     pub profile: Option<String>
 }
+
