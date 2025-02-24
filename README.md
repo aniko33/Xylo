@@ -18,14 +18,14 @@ git clone https://github.com/your-username/xylo.git
 cd xylo
 ```
 
-2. Build the project (ensure you have Rust installed):
+2. Install Xylo globally (ensure you have Rust installed):
 ```
-cargo build --release
+cargo install --path .
 ```
 
 3. Run Xylo:
 ```
-./target/release/xylo
+xylo
 ```
 
 ---
