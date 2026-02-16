@@ -14,7 +14,7 @@
 
 1. Clone the repository:
 ```
-git clone https://github.com/your-username/xylo.git
+git clone https://github.com/aniko33/xylo.git
 cd xylo
 ```
 
